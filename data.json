@@ -1,0 +1,340 @@
+{
+   "marijuana": [
+      {
+         "state": "Arizona",
+         "initiative": "Proposition 205",
+         "note": "Legalization of marijuana possession and consumption by people 21 and older",
+         "link": "https://ballotpedia.org/Arizona_Marijuana_Legalization,_Proposition_205_(2016)"
+      },
+      {
+         "state": "Arkansas",
+         "initiative": "Issue 7",
+         "note": "",
+         "link": ""
+      },
+      {
+         "state": "Arkansas",
+         "initiative": "Issue 6",
+         "note": "",
+         "link": ""
+      },
+      {
+         "state": "California",
+         "initiative": "Proposition 64",
+         "note": "",
+         "link": ""
+      },
+      {
+         "state": "Florida",
+         "initiative": "Amendment 2",
+         "note": "",
+         "link": ""
+      },
+      {
+         "state": "Maine",
+         "initiative": "Question 1",
+         "note": "",
+         "link": ""
+      },
+      {
+         "state": "Massachusetts",
+         "initiative": "Question 4",
+         "note": "",
+         "link": ""
+      },
+      {
+         "state": "Montana",
+         "initiative": "I-182",
+         "note": "",
+         "link": ""
+      },
+      {
+         "state": "Nevada",
+         "initiative": "Question 2",
+         "note": "",
+         "link": ""
+      },
+      {
+         "state": "North Dakota",
+         "initiative": "Initiated Statutory Measure 5",
+         "note": "",
+         "link": ""
+      }
+   ],
+   "minimum wage": [
+      {
+         "state": "Arizona",
+         "initiative": "Proposition 206",
+         "note": "",
+         "link": ""
+      },
+      {
+         "state": "Colorado",
+         "initiative": "Amendment 70",
+         "note": "",
+         "link": ""
+      },
+      {
+         "state": "Maine",
+         "initiative": "Question 4",
+         "note": "",
+         "link": ""
+      },
+      {
+         "state": "South Dakota",
+         "initiative": "Referred Law 20",
+         "note": "",
+         "link": ""
+      },
+      {
+         "state": "Washington",
+         "initiative": "Initiative 1433",
+         "note": "",
+         "link": ""
+      }
+   ],
+   "healthcare": [
+      {
+         "state": "California",
+         "initiative": "Proposition 52",
+         "note": "",
+         "link": ""
+      },
+      {
+         "state": "California",
+         "initiative": "Proposition 61",
+         "note": "",
+         "link": ""
+      },
+      {
+         "state": "Colorado",
+         "initiative": "Amendment 69",
+         "note": "",
+         "link": ""
+      },
+      {
+         "state": "Nevada",
+         "initiative": "Question 4",
+         "note": "",
+         "link": ""
+      },
+      {
+         "state": "Washington",
+         "initiative": "Advisory Vote 14",
+         "note": "",
+         "link": ""
+      }
+   ],
+   "gun control": [
+      {
+         "state": "California",
+         "initiative": "Proposition 63",
+         "note": "",
+         "link": ""
+      },
+      {
+         "state": "Maine",
+         "initiative": "Question 3",
+         "note": "",
+         "link": ""
+      },
+      {
+         "state": "Nevada",
+         "initiative": "Question 1",
+         "note": "",
+         "link": ""
+      },
+      {
+         "state": "Washington",
+         "initiative": "Initiative 1491",
+         "note": "",
+         "link": ""
+      }
+   ],
+   "tobacco": [
+      {
+         "state": "California",
+         "initiative": "Proposition 56",
+         "note": "",
+         "link": ""
+      },
+      {
+         "state": "Colorado",
+         "initiative": "Amendment 72",
+         "note": "",
+         "link": ""
+      },
+      {
+         "state": "Idaho",
+         "initiative": "\"College, Not Cancer Act\"",
+         "note": "",
+         "link": ""
+      },
+      {
+         "state": "Missouri",
+         "initiative": "Proposition A",
+         "note": "",
+         "link": ""
+      },
+      {
+         "state": "Missouri",
+         "initiative": "Constitutional Amendment 3",
+         "note": "",
+         "link": ""
+      },
+      {
+         "state": "North Dakota",
+         "initiative": "Initiated Statutory Measure 4",
+         "note": "",
+         "link": ""
+      }
+   ],
+   "education": [
+      {
+         "state": "Alabama",
+         "initiative": "Amendment 1",
+         "note": "",
+         "link": ""
+      },
+      {
+         "state": "Alaska",
+         "initiative": "Ballot Measure 2",
+         "note": "",
+         "link": ""
+      },
+      {
+         "state": "California",
+         "initiative": "Proposition 51",
+         "note": "",
+         "link": ""
+      },
+      {
+         "state": "California",
+         "initiative": "Proposition 58",
+         "note": "",
+         "link": ""
+      },
+      {
+         "state": "Georgia",
+         "initiative": "Amendment 1",
+         "note": "",
+         "link": ""
+      },
+      {
+         "state": "Louisiana",
+         "initiative": "Amendment 2",
+         "note": "",
+         "link": ""
+      },
+      {
+         "state": "Maine",
+         "initiative": "Question 2",
+         "note": "",
+         "link": ""
+      },
+      {
+         "state": "Massachusetts",
+         "initiative": "Question 2",
+         "note": "",
+         "link": ""
+      },
+      {
+         "state": "Oklahoma",
+         "initiative": "State Question 779",
+         "note": "",
+         "link": ""
+      },
+      {
+         "state": "Oregon",
+         "initiative": "Measure 99",
+         "note": "",
+         "link": ""
+      },
+      {
+         "state": "Oregon",
+         "initiative": "Measure 98",
+         "note": "",
+         "link": ""
+      },
+      {
+         "state": "South Dakota",
+         "initiative": "Constitutional Amendment R",
+         "note": "",
+         "link": ""
+      }
+   ],
+   "voting": [
+      {
+         "state": "California",
+         "initiative": "Proposition 53",
+         "note": "",
+         "link": ""
+      },
+      {
+         "state": "Colorado",
+         "initiative": "Proposition 107",
+         "note": "",
+         "link": ""
+      },
+      {
+         "state": "Colorado",
+         "initiative": "Proposition 108",
+         "note": "",
+         "link": ""
+      },
+      {
+         "state": "Hawaii",
+         "initiative": "\"Money is not Free Speech\" Amendment",
+         "note": "",
+         "link": ""
+      },
+      {
+         "state": "Maine",
+         "initiative": "Question 5",
+         "note": "",
+         "link": ""
+      },
+      {
+         "state": "Missouri",
+         "initiative": "Constitutional Amendment 2",
+         "note": "",
+         "link": ""
+      },
+      {
+         "state": "Missouri",
+         "initiative": "Constitutional Amendment 6",
+         "note": "",
+         "link": ""
+      },
+      {
+         "state": "North Dakota",
+         "initiative": "North Dakota Fiscal Impact Initiatives on General Election Ballot Amendment (2016)",
+         "note": "",
+         "link": "https://ballotpedia.org/North_Dakota_Fiscal_Impact_Initiatives_on_General_Election_Ballot_Amendment_(2016)"
+      },
+      {
+         "state": "South Dakota",
+         "initiative": "Referred Law 19",
+         "note": "",
+         "link": ""
+      },
+      {
+         "state": "South Dakota",
+         "initiative": "Constitutional Amendment V",
+         "note": "",
+         "link": ""
+      },
+      {
+         "state": "South Dakota",
+         "initiative": "Initiated Measure 22",
+         "note": "",
+         "link": ""
+      },
+      {
+         "state": "Alaska",
+         "initiative": "Ballot Measure 1",
+         "note": "",
+         "link": ""
+      }
+   ]
+}
