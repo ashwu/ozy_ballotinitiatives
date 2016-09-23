@@ -16,33 +16,27 @@
     		stroke-width: 1;
 		}
 
-		.marijuana {
-			fill: #98bb49;
-		}
-
-		.wage {
-			fill: #96CAB4;
-		}
-
-		.gun {
-			fill: #9194a2;
-		}
-
-		.tobacco {
-			fill: #75250a;
-		}
-
-		.education {
-			fill: #ffc125;
-		}
-
-		.elections {
-			fill: #5ea1d4;
-		}
-
 		#tooltip-container {
-			height: 75px;
+			height: 100px;
 		}
+
+		.tooltip {
+			margin-top: 5px;
+			font-size: 25px;
+			font-family: "Franklin Gothic Demi";
+			text-transform: uppercase
+		}
+
+		.info {
+			height: 20px;
+			margin-top: 5px;
+			font-family: "Franklin Gothic Book"
+		}
+
+		label {
+			font-family: "Franklin Gothic Medium";
+		}
+
 
 	</style>
 
@@ -86,8 +80,13 @@
 
 	var tooltip = d3.select("#tooltip-container")
 	    .append("div")   
-		.attr("class", "tooltip");               
+		.attr("class", "tooltip")
+		// .text("hey");
 
+	var info = d3.select("#tooltip-container")
+	    .append("p")   
+		.attr("class", "info")
+		// .text("hey");                  
 
 	var states = [];
 	var jsonState;
@@ -100,24 +99,59 @@
 		"elections": 6
 	};
 
-	var checked = "marijuana";
+	var checked="marijuana";
+	colorStates;
 
 	var clearStates = function(){
-		d3.selectAll('.state')
-			.style("fill", "#dbdbdb");
+		svg.selectAll('.state')
+			.style("fill", "#dbdbdb")
+			.classed("bold",false) 
 	}
 
-	var colorStates = function(checked, state, value){
-        d3.selectAll('.' +state)
+	var colorStates = function(checked, state, value, initiative, note){
+        svg.selectAll('.' +state)
             .transition()
+            .attr("class", "state " + state + " bold")
             .style("fill", function(d){
              	if (d.properties.name == state) {
                 	return color(value);
                 }
-            });  
+            })
+        outlineState(state, initiative, note)
     }
 
-    
+    var outlineState = function(state, initiative, note){
+    	svg.select("."+state)
+    		// .classed("bold",true)
+			.on("mouseover", function(d) { 
+				d3.select(this.parentNode.appendChild(this))
+					.style('stroke','#000')
+					.style('stroke-width', 1.5)
+					.style('opacity','1');
+		
+		    	tooltip.transition()        
+		      	   .duration(200)            
+		           .text(state + ': ' + initiative)
+		        
+		        info.transition()
+		        	.duration(200)
+		        	.text(note)
+			})	
+			.on("mouseout", function(d) {
+				d3.select(this)
+					.style('stroke','#fff')
+					.style('stroke-width', 1)
+					.style('opacity','0.6'); 
+
+		        tooltip.transition()        
+		           .duration(200)      
+		           .text('')
+
+		        info.transition()
+		        	.duration(200)
+		        	.text('')
+		    }); 
+    }
 
     d3.json("us-states.json", function(us) {
     	svg.selectAll("path")
@@ -130,56 +164,23 @@
 		})
 
 		d3.json("data.json", function(data) { // initiative data
-			var dataState;
-		    var value;
-
 	    	d3.selectAll("input").on("change", function() {
 		        checked = this.id;
-
 		    	for (a = 0; a < data[checked].length; a++) {
-		    		dataState = data[checked][a].state;
-		    		value = topicObj[checked];
-		    		console.log(dataState + ', ' + value);
+		    		var dataState = data[checked][a].state;
+		    		var value = topicObj[checked];
 		    		clearStates();
-					colorStates(checked, dataState, value);
+					colorStates(checked, dataState, value, data[checked][a].initiative, data[checked][a].note);
 		    	}
-
-		    });
-	        
-		});
-    });
-
-	// d3.json("us-states.json", function(json) { // state geoJSON data
-		// for (var j = 0; j < json.features.length; j++) {
-					// 	if (json.features[j].properties.name == dataState){
-					// 		json.features[j].properties.value = topicArray[checked];
-					// 	}
-					// }
-	
-       
-
-        d3.selectAll(".highlighted")
-			.on("mouseover", function(d) {  
-				d3.select(this.parentNode.appendChild(this))
-    				.style('stroke','#000')
-    				.style('stroke-width', 1.5)
-    				.style('opacity','1');
-    		
-		    	tooltip.transition()        
-		      	   .duration(200)            
-		           .text(d.properties.name)
-			})
-			.on("mouseout", function(d) {
-				d3.select(this)
-    				.style('stroke','#fff')
-    				.style('stroke-width', 1)
-    				.style('opacity','0.6'); 
-
-		        tooltip.transition()        
-		           .duration(200)      
-		           .text('')
 		    }); 
-	// });
+		});	
+		
+    });
+   
+
+    
+
+	
 	
 
 </script>
