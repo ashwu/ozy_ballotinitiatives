@@ -10,14 +10,21 @@
 	<!-- ******** CSS *******-->
 	<style type="text/css">
 		.state {
-			opacity:0.6;    		
+			opacity:0.75;    		
 			stroke: #fff;
 			fill: #dbdbdb;
     		stroke-width: 1;
 		}
 
+		#filter-container {
+			text-align: center;
+			margin-bottom: 20px;
+		}
+
 		#tooltip-container {
-			height: 100px;
+			height: 85px;
+			width: 80%;
+			margin: 0 auto;
 		}
 
 		.tooltip {
@@ -33,8 +40,46 @@
 			font-family: "Franklin Gothic Book"
 		}
 
+		input {
+			margin-right: 7px;
+		}
+
 		label {
-			font-family: "Franklin Gothic Medium";
+			font-family: "Franklin Gothic Book";
+			margin-right: 12px;
+		}
+
+		.icon {
+			margin-right: 20px;
+			height: 100px;
+			width: 80px;
+			float: left;
+			background-repeat: no-repeat;
+			background-size: contain;
+		}
+
+		.icon--marijuana {
+			background-image: url("img/marijuana.png");
+		}
+
+		.icon--wage {
+			background-image: url("img/wage.png");
+		}
+
+		.icon--gun {
+			background-image: url("img/gun.png");
+		}
+
+		.icon--tobacco {
+			background-image: url("img/tobacco.png");
+		}
+
+		.icon--education {
+			background-image: url("img/education.png");
+		}
+
+		.icon--elections {
+			background-image: url("img/elections.png");
 		}
 
 
@@ -53,7 +98,10 @@
 	    <input type="radio" id="elections" name="topic"/><label for="elections">Elections</label>
    </form>
 </div>
-<div id="tooltip-container"></div>
+
+<div id="tooltip-container">
+	<div class="icon icon--marijuana"></div>
+</div>
 <div class="map-container"> 
 	<div id="map"></div>
 </div>
@@ -72,7 +120,7 @@
 
 	var color = d3.scaleLinear()
 		.domain([1,2,3,4,5,6])
-    	.range(["#98bb49", "#96CAB4", "#9194a2", "#75250a","#ffc125", "#5ea1d4"]);
+    	.range(["#37853F", "#82B441", "#3a3a3a", "#c4802a","#5155a5", "#fbaa20"]);
 
 	var svg = d3.select("#map").append("svg")
 	    .attr("width", width)
@@ -81,7 +129,7 @@
 	var tooltip = d3.select("#tooltip-container")
 	    .append("div")   
 		.attr("class", "tooltip")
-		// .text("hey");
+		.text("# states with checked initiatives on the ballot");
 
 	var info = d3.select("#tooltip-container")
 	    .append("p")   
@@ -105,33 +153,42 @@
 	var clearStates = function(){
 		svg.selectAll('.state')
 			.style("fill", "#dbdbdb")
-			.classed("bold",false) 
+			.classed("bold",false)
+
 	}
 
 	var colorStates = function(checked, state, value, initiative, note){
         svg.selectAll('.' +state)
             .transition()
-            .attr("class", "state " + state + " bold")
+            .attr("class", "state bold " + state)
             .style("fill", function(d){
              	if (d.properties.name == state) {
                 	return color(value);
                 }
             })
-        outlineState(state, initiative, note)
+        outlineState(checked, state, initiative, note)
     }
 
-    var outlineState = function(state, initiative, note){
-    	svg.select("."+state)
-    		// .classed("bold",true)
+    var changeIcon = function(checked){
+    	
+    	d3.select('.icon')
+    		.attr('class','icon icon--'+checked)
+    	console.log(checked);
+    }
+
+    var outlineState = function(checked, state, initiative, note){
+    	svg.selectAll("." + state)
 			.on("mouseover", function(d) { 
 				d3.select(this.parentNode.appendChild(this))
 					.style('stroke','#000')
 					.style('stroke-width', 1.5)
 					.style('opacity','1');
 		
-		    	tooltip.transition()        
-		      	   .duration(200)            
-		           .text(state + ': ' + initiative)
+		    	tooltip
+		    		.classed(checked, true)
+		    		.transition()        
+		      	   	.duration(200)            
+		           	.text(state + ': ' + initiative)
 		        
 		        info.transition()
 		        	.duration(200)
@@ -141,11 +198,13 @@
 				d3.select(this)
 					.style('stroke','#fff')
 					.style('stroke-width', 1)
-					.style('opacity','0.6'); 
+					.style('opacity','0.75'); 
 
-		        tooltip.transition()        
-		           .duration(200)      
-		           .text('')
+		        tooltip
+		        	.classed(checked, false)
+		        	.transition()        
+		           	.duration(200)      
+		           	.text('# states with checked initiatives on the ballot')
 
 		        info.transition()
 		        	.duration(200)
@@ -166,12 +225,15 @@
 		d3.json("data.json", function(data) { // initiative data
 	    	d3.selectAll("input").on("change", function() {
 		        checked = this.id;
+		        changeIcon(checked);
 		    	for (a = 0; a < data[checked].length; a++) {
+		    		clearStates();
 		    		var dataState = data[checked][a].state;
 		    		var value = topicObj[checked];
-		    		clearStates();
-					colorStates(checked, dataState, value, data[checked][a].initiative, data[checked][a].note);
+		    		var bold = "bold";
+					colorStates(checked, dataState, value, data[checked][a].initiative, data[checked][a].note, bold);
 		    	}
+
 		    }); 
 		});	
 		
