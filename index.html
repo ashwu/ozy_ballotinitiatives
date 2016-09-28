@@ -1,14 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Ballot Initiatives</title>
+	<title>Ballot Initiatives 2016</title>
 	<script src="https://d3js.org/d3.v4.min.js"></script>
 	<script src="http://d3js.org/topojson.v1.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/queue-async/1.0.7/queue.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
 
+	<!-- favicon -->
+	<link rel="icon" href="http://www.ozy.com/magazine/graphics/favicon.ico">
+
+
 	<!-- ******** CSS *******-->
 	<style type="text/css">
+
+		#map {
+			max-width: 1000px;
+			width: 95%;
+			margin: 0 auto;
+		}
+
+		svg {
+			display: block;
+			margin: auto;
+		}
+
 		.state {
 			opacity:0.75;    		
 			stroke: #fff;
@@ -23,7 +39,7 @@
 
 		#tooltip-container {
 			height: 85px;
-			width: 80%;
+			width: 70%;
 			margin: 0 auto;
 		}
 
@@ -82,7 +98,6 @@
 			background-image: url("img/elections.png");
 		}
 
-
 	</style>
 
 </head>
@@ -107,15 +122,18 @@
 </div>
 
 <script>
-	//Width and height of map
-	var width = 960;
-	var height = 500;
+	//Width and height of map for responsiveness
+	var margin = {top: 10, left: 5, bottom: 10, right: 5};
+	var pre_width = parseInt(d3.select('#map').style('width'));
+	var width = pre_width - margin.left - margin.right;
+	var mapRatio = .55;
+	var height = width * mapRatio;
 
 	// D3 Projection
 	var projection = d3.geoAlbersUsa()
-	   .translate([width/2, height/2])
-	   .scale([1000]);
-        
+	   .scale(width)
+	   .translate([width / 2, height / 2]);
+
 	var path = d3.geoPath().projection(projection);
 
 	var color = d3.scaleLinear()
@@ -133,11 +151,10 @@
 
 	var info = d3.select("#tooltip-container")
 	    .append("p")   
-		.attr("class", "info")
-		// .text("hey");                  
+		.attr("class", "info")                
 
-	var states = [];
-	var jsonState;
+	var checked;
+
 	var topicObj = {
 		"marijuana": 1,
 		"wage": 2,
@@ -147,14 +164,11 @@
 		"elections": 6
 	};
 
-	var checked="marijuana";
-	colorStates;
 
 	var clearStates = function(){
 		svg.selectAll('.state')
 			.style("fill", "#dbdbdb")
 			.classed("bold",false)
-
 	}
 
 	var colorStates = function(checked, state, value, initiative, note){
@@ -170,10 +184,8 @@
     }
 
     var changeIcon = function(checked){
-    	
     	d3.select('.icon')
     		.attr('class','icon icon--'+checked)
-    	console.log(checked);
     }
 
     var outlineState = function(checked, state, initiative, note){
@@ -212,26 +224,56 @@
 		    }); 
     }
 
+    var resize = function() {
+    	
+    	// adjust things when the window size changes
+	    width = parseInt(d3.select('#map').style('width'));
+	    width = width - margin.left - margin.right;
+	    height = width * mapRatio;
+
+	    // update projection
+	    projection
+	        .translate([width / 2, height / 2])
+	        .scale(width);
+
+	    // resize maps
+		svg
+	        .style("width", width + "px")
+	        .style("height", height + "px");
+
+	    svg.selectAll('.state').attr('d', path);
+
+	}
+
+    d3.select(window).on('resize', resize);
+
     d3.json("us-states.json", function(us) {
+
     	svg.selectAll("path")
-		.data(us.features)
-		.enter()
-		.append("path")
-		.attr("d", path)
-		.attr("class",function(d){
-			return "state " + d.properties.name; 
-		})
+			.data(us.features)
+			.enter()
+			.append("path")
+			.attr("d", path)
+			.attr("class",function(d){
+				return "state " + d.properties.name; 
+			})
 
 		d3.json("data.json", function(data) { // initiative data
+			// to start on marijuana
+			for (a = 0; a < data['marijuana'].length; a++) {
+	    		var dataState = data['marijuana'][a].state;
+	    		var value = 1;
+				colorStates(checked, dataState, value, data['marijuana'][a].initiative, data['marijuana'][a].note);
+	    	}
+
 	    	d3.selectAll("input").on("change", function() {
 		        checked = this.id;
 		        changeIcon(checked);
-		    	for (a = 0; a < data[checked].length; a++) {
-		    		clearStates();
-		    		var dataState = data[checked][a].state;
-		    		var value = topicObj[checked];
-		    		var bold = "bold";
-					colorStates(checked, dataState, value, data[checked][a].initiative, data[checked][a].note, bold);
+		        clearStates();
+		    	for (i = 0; i < data[checked].length; i++) {
+		    		var dataState = data[checked][i].state;
+		    		value = topicObj[checked];
+					colorStates(checked, dataState, value, data[checked][i].initiative, data[checked][i].note);
 		    	}
 
 		    }); 
