@@ -14,55 +14,37 @@
 	<!-- ******** CSS *******-->
 	<style type="text/css">
 
-		#map {
-			max-width: 1000px;
-			width: 95%;
-			margin: 0 auto;
-		}
-
-		svg {
-			display: block;
-			margin: auto;
-		}
-
-		.state {
-			opacity:0.75;    		
-			stroke: #fff;
-			fill: #dbdbdb;
-    		stroke-width: 1;
-		}
-
 		#filter-container {
 			text-align: center;
-			margin-bottom: 20px;
+			margin-top: 25px;
+			margin-bottom: 30px;
 		}
 
-		#tooltip-container {
-			height: 85px;
-			width: 70%;
-			margin: 0 auto;
+		input[type="radio"] {
+		    display:none;
 		}
 
-		.tooltip {
-			margin-top: 5px;
-			font-size: 25px;
-			font-family: "Franklin Gothic Demi";
-			text-transform: uppercase
-		}
-
-		.info {
-			height: 20px;
-			margin-top: 5px;
-			font-family: "Franklin Gothic Book"
-		}
-
-		input {
-			margin-right: 7px;
+		[type="radio"]:checked + label {
+			color: #fff;
+			background-color: #7a7a7a;
+			border: 1px solid #7a7a7a;
 		}
 
 		label {
 			font-family: "Franklin Gothic Book";
-			margin-right: 12px;
+			color:#7a7a7a;
+			border: 1px solid #a3a3a3;
+			border-radius: 4px;
+			margin: 0 6px;
+			padding: 5px 10px;
+			cursor: pointer;
+			-webkit-transition: all 0.2s linear;
+		}
+
+		label:hover {
+			color: #fff;
+			background-color: #a3a3a3;
+			border: 1px solid #a3a3a3;
 		}
 
 		.icon {
@@ -98,6 +80,43 @@
 			background-image: url("img/elections.png");
 		}
 
+		#map {
+			max-width: 1000px;
+			width: 95%;
+			margin: 0 auto;
+		}
+
+		svg {
+			display: block;
+			margin: auto;
+		}
+
+		.state {
+			opacity:0.75;    		
+			stroke: #fff;
+			fill: #dbdbdb;
+    		stroke-width: 1;
+		}
+
+		#tooltip-container {
+			height: 85px;
+			width: 70%;
+			margin: 0 auto;
+		}
+
+		.tooltip {
+			margin-top: 5px;
+			font-size: 25px;
+			font-family: "Franklin Gothic Demi";
+			text-transform: uppercase
+		}
+
+		.info {
+			height: 20px;
+			margin-top: 5px;
+			font-family: "Franklin Gothic Book"
+		}
+
 	</style>
 
 </head>
@@ -105,12 +124,25 @@
 
 <div id="filter-container">
  	<form>
-		<input type="radio" id="marijuana" name="topic" checked=true/><label for="marijuana">Marijuana</label>
-	    <input type="radio" id="wage" name="topic"/><label for="wage">Minimum Wage</label>
-	    <input type="radio" id="gun" name="topic"/><label for="gun">Gun control</label>
-	    <input type="radio" id="tobacco" name="topic"/><label for="tobacco">Tobacco</label>
-	    <input type="radio" id="education" name="topic"/><label for="education">Education</label>
-	    <input type="radio" id="elections" name="topic"/><label for="elections">Elections</label>
+
+		<input type="radio" id="marijuana" name="topic" checked=true/>
+		<label for="marijuana">Marijuana</label>
+
+		<input type="radio" id="wage" name="topic"/>
+		<label for="wage">Minimum Wage</label>
+
+		<input type="radio" id="gun" name="topic"/>
+		<label for="gun">Gun control</label>
+
+		<input type="radio" id="tobacco" name="topic"/>
+		<label for="tobacco">Tobacco</label>
+
+		<input type="radio" id="education" name="topic"/>
+		<label for="education">Education</label>
+
+		<input type="radio" id="elections" name="topic"/>
+		<label for="elections">Elections</label>
+ 
    </form>
 </div>
 
