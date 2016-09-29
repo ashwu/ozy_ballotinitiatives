@@ -1,0 +1,116 @@
+#filter-container {
+			width: 90%;
+    		margin-left: auto;
+    		margin-right: auto;
+    		overflow: hidden;
+    		padding-top: 10px;
+			margin-top: 25px;
+			margin-bottom: 20px;
+			
+		}
+
+		form {
+			text-align: center;
+		}
+
+		.filter{
+			display: inline-block;
+			margin-bottom: 20px;
+		}
+
+		input[type="radio"] {
+		    display:none;
+		}
+
+		[type="radio"]:checked + label {
+			color: #fff;
+			background-color: #7a7a7a;
+			border: 1px solid #7a7a7a;
+		}
+
+		label {
+			font-family: "Franklin Gothic Book";
+			color:#7a7a7a;
+			border: 1px solid #a3a3a3;
+			border-radius: 4px;
+			margin: 0 3px;
+			padding: 5px 10px;
+			cursor: pointer;
+			-webkit-transition: all 0.2s linear;
+		}
+
+		label:hover {
+			color: #fff;
+			background-color: #a3a3a3;
+			border: 1px solid #a3a3a3;
+		}
+
+		.icon {
+			margin-right: 20px;
+			height: 100px;
+			width: 80px;
+			float: left;
+			background-repeat: no-repeat;
+			background-size: contain;
+		}
+
+		.icon--marijuana {
+			background-image: url("img/marijuana.png");
+		}
+
+		.icon--wage {
+			background-image: url("img/wage.png");
+		}
+
+		.icon--gun {
+			background-image: url("img/gun.png");
+		}
+
+		.icon--tobacco {
+			background-image: url("img/tobacco.png");
+		}
+
+		.icon--education {
+			background-image: url("img/education.png");
+		}
+
+		.icon--elections {
+			background-image: url("img/elections.png");
+		}
+
+		#map {
+			max-width: 1000px;
+			width: 95%;
+			margin: 0 auto;
+		}
+
+		svg {
+			display: block;
+			margin: auto;
+		}
+
+		.state {
+			opacity:0.75;    		
+			stroke: #fff;
+			fill: #dbdbdb;
+    		stroke-width: 1;
+		}
+
+		#tooltip-container {
+			height: 85px;
+			width: 70%;
+			margin: 0 auto;
+		}
+
+		.tooltip {
+			margin-top: 5px;
+			font-size: 25px;
+			font-family: "Franklin Gothic Demi";
+			text-transform: uppercase
+		}
+
+		.info {
+			height: 20px;
+			margin-top: 5px;
+			font-family: "Franklin Gothic Book"
+		}

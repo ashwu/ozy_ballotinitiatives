@@ -15,9 +15,23 @@
 	<style type="text/css">
 
 		#filter-container {
-			text-align: center;
+			width: 90%;
+    		margin-left: auto;
+    		margin-right: auto;
+    		overflow: hidden;
+    		padding-top: 10px;
 			margin-top: 25px;
-			margin-bottom: 30px;
+			margin-bottom: 20px;
+			
+		}
+
+		form {
+			text-align: center;
+		}
+
+		.filter{
+			display: inline-block;
+			margin-bottom: 20px;
 		}
 
 		input[type="radio"] {
@@ -35,7 +49,7 @@
 			color:#7a7a7a;
 			border: 1px solid #a3a3a3;
 			border-radius: 4px;
-			margin: 0 6px;
+			margin: 0 3px;
 			padding: 5px 10px;
 			cursor: pointer;
 			-webkit-transition: all 0.2s linear;
@@ -99,7 +113,7 @@
 		}
 
 		#tooltip-container {
-			height: 85px;
+			height: 80px;
 			width: 70%;
 			margin: 0 auto;
 		}
@@ -107,8 +121,8 @@
 		.tooltip {
 			margin-top: 5px;
 			font-size: 25px;
-			font-family: "Franklin Gothic Demi";
-			text-transform: uppercase
+			font-family: "Franklin Gothic Medium";
+			text-transform: uppercase;
 		}
 
 		.info {
@@ -117,6 +131,8 @@
 			font-family: "Franklin Gothic Book"
 		}
 
+		/*******MEDIA QUERIES**********/
+
 	</style>
 
 </head>
@@ -124,41 +140,53 @@
 
 <div id="filter-container">
  	<form>
-
-		<input type="radio" id="marijuana" name="topic" checked=true/>
-		<label for="marijuana">Marijuana</label>
-
-		<input type="radio" id="wage" name="topic"/>
-		<label for="wage">Minimum Wage</label>
-
-		<input type="radio" id="gun" name="topic"/>
-		<label for="gun">Gun control</label>
-
-		<input type="radio" id="tobacco" name="topic"/>
-		<label for="tobacco">Tobacco</label>
-
-		<input type="radio" id="education" name="topic"/>
-		<label for="education">Education</label>
-
-		<input type="radio" id="elections" name="topic"/>
-		<label for="elections">Elections</label>
- 
+ 		<nobr>
+ 		<div class="filter">
+			<input type="radio" id="marijuana" name="topic" checked=true/>
+			<label for="marijuana">Marijuana</label>
+		</div>
+		<div class="filter">
+			<input type="radio" id="wage" name="topic"/>
+			<label for="wage">Minimum Wage</label>
+		</div>
+		<div class="filter">
+			<input type="radio" id="gun" name="topic"/>
+			<label for="gun">Gun control</label>
+		</div>
+		</nobr>
+		<nobr>
+		<div class="filter">
+			<input type="radio" id="tobacco" name="topic"/>
+			<label for="tobacco">Tobacco</label>
+		</div>
+		<div class="filter">
+			<input type="radio" id="education" name="topic"/>
+			<label for="education">Education</label>
+		</div>
+		<div class="filter">	
+			<input type="radio" id="elections" name="topic"/>
+			<label for="elections">Elections</label>
+ 		</div>
+ 		</nobr>
    </form>
 </div>
 
 <div id="tooltip-container">
 	<div class="icon icon--marijuana"></div>
 </div>
+
 <div class="map-container"> 
 	<div id="map"></div>
 </div>
 
+
+<!-- *******JAVASCRIPT********** -->
 <script>
 	//Width and height of map for responsiveness
 	var margin = {top: 10, left: 5, bottom: 10, right: 5};
 	var pre_width = parseInt(d3.select('#map').style('width'));
 	var width = pre_width - margin.left - margin.right;
-	var mapRatio = .55;
+	var mapRatio = .5;
 	var height = width * mapRatio;
 
 	// D3 Projection
@@ -179,13 +207,13 @@
 	var tooltip = d3.select("#tooltip-container")
 	    .append("div")   
 		.attr("class", "tooltip")
-		.text("# states with checked initiatives on the ballot");
+		.text("States with ballot initiatives on marijuana"); // on initial load
 
 	var info = d3.select("#tooltip-container")
 	    .append("p")   
 		.attr("class", "info")                
 
-	var checked;
+	var checked = "marijuana";
 
 	var topicObj = {
 		"marijuana": 1,
@@ -195,7 +223,6 @@
 		"education": 5,
 		"elections": 6
 	};
-
 
 	var clearStates = function(){
 		svg.selectAll('.state')
@@ -212,52 +239,64 @@
                 	return color(value);
                 }
             })
+
         outlineState(checked, state, initiative, note)
     }
 
     var changeIcon = function(checked){
     	d3.select('.icon')
     		.attr('class','icon icon--'+checked)
+
+    	tooltip
+    		.text(function(){
+    			return "States with ballot initiatives on " + checked
+    		})
     }
 
     var outlineState = function(checked, state, initiative, note){
+
     	svg.selectAll("." + state)
 			.on("mouseover", function(d) { 
-				d3.select(this.parentNode.appendChild(this))
-					.style('stroke','#000')
-					.style('stroke-width', 1.5)
-					.style('opacity','1');
+				if ( this.classList.contains("bold")) {
+					d3.select(this.parentNode.appendChild(this))
+						.style('stroke','#000')
+						.style('stroke-width', 1.5)
+						.style('opacity','1');
 		
-		    	tooltip
-		    		.classed(checked, true)
-		    		.transition()        
-		      	   	.duration(200)            
-		           	.text(state + ': ' + initiative)
-		        
-		        info.transition()
-		        	.duration(200)
-		        	.text(note)
+			    	tooltip
+			    		.classed(checked, true)
+			    		.transition()        
+			      	   	.duration(200)            
+			           	.text(state + ': ' + initiative)
+
+			        info.transition()
+			        	.duration(200)
+			        	.text(note)
+				}
 			})	
 			.on("mouseout", function(d) {
-				d3.select(this)
-					.style('stroke','#fff')
-					.style('stroke-width', 1)
-					.style('opacity','0.75'); 
+				if ( this.classList.contains("bold")) {
+					d3.select(this)
+						.style('stroke','#fff')
+						.style('stroke-width', 1)
+						.style('opacity','0.75'); 
 
-		        tooltip
-		        	.classed(checked, false)
-		        	.transition()        
-		           	.duration(200)      
-		           	.text('# states with checked initiatives on the ballot')
+			        tooltip
+			        	.classed(checked, false)
+			        	.transition()        
+			           	.duration(200)
+			           	.text(function(){
+			           		return "States with ballot initiatives on " + checked
+			           	})
 
-		        info.transition()
-		        	.duration(200)
-		        	.text('')
+			        info.transition()
+			        	.duration(200)
+			        	.text('')
+			    }
 		    }); 
     }
 
     var resize = function() {
-    	
     	// adjust things when the window size changes
 	    width = parseInt(d3.select('#map').style('width'));
 	    width = width - margin.left - margin.right;
@@ -312,12 +351,6 @@
 		});	
 		
     });
-   
-
-    
-
-	
-	
 
 </script>
 
