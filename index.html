@@ -128,10 +128,57 @@
 		.info {
 			height: 20px;
 			margin-top: 5px;
+			color: #333;
 			font-family: "Franklin Gothic Book"
 		}
 
 		/*******MEDIA QUERIES**********/
+
+		@media (max-width: 800px){
+
+			#map {
+				width: 100%;
+			}
+
+			.tooltip {
+				font-size: 21px;
+			}
+
+			.info {
+				font-size: 14px;
+			}
+		}
+
+
+		@media (max-width: 600px){
+			
+
+			#tooltip-container {
+				width: 95%;
+			}
+
+			.icon {
+				width: 55px;
+			}
+		}
+
+		@media (max-width: 425px){
+			label {
+				font-size: 13px;
+			}
+
+			.tooltip {
+				font-size: 17.5px;
+			}
+
+			.info {
+				font-size: 13spx;
+			}
+
+			.icon {
+				width: 55px;
+			}
+		}
 
 	</style>
 
@@ -147,7 +194,7 @@
 		</div>
 		<div class="filter">
 			<input type="radio" id="wage" name="topic"/>
-			<label for="wage">Minimum Wage</label>
+			<label for="wage">Minimum wage</label>
 		</div>
 		<div class="filter">
 			<input type="radio" id="gun" name="topic"/>
